@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jsilver.boardchat.mapper.PostMapper">
+	<select id="select" parameterType="map" resultType="Post">
+		SELECT *, (
+			SELECT count(*)
+			FROM comments
+			WHERE post_id = posts.id AND isDeleted = 0) as commentCount
+		FROM posts
+		WHERE
+		isDeleted = 0
+		<if test="option != null and search != null">
+			<choose>
+				<when test="option == '제목'">
+					AND title like CONCAT('%', #{search}, '%')
+				</when>
+				<when test="option == '작성자'">
+					AND writer like CONCAT('%', #{search}, '%')
+				</when>
+			</choose>
+		</if>
+		<if test="category != null">
+			AND category = #{category}
+		</if>
+		ORDER BY ctime DESC
+		LIMIT #{start}, 20;
+	</select>
+	<select id="selectOne" parameterType="int"	resultType="Post">
+		SELECT *, (
+			SELECT count(*)
+			FROM comments
+			WHERE post_id = #{id} AND isDeleted = 0) as commentCount
+		FROM posts
+		WHERE id = #{id};
+	</select>
+	<insert id="insert" parameterType="Post">
+		INSERT INTO posts(title, content, writer, password, category, ctime, mtime)
+		VALUES (#{title}, #{content}, #{writer}, #{password}, #{category}, #{ctime}, #{mtime});
+	</insert>
+	<update id="delete" parameterType="int">
+		UPDATE comments
+		SET isDeleted = 1
+		WHERE post_id = #{id};
+		
+		UPDATE posts
+		SET isDeleted = 1
+		WHERE id = #{id};
+	</update>
+	<update id="update" parameterType="Post">
+		UPDATE posts
+		SET title = #{title}, content = #{content}, writer = #{writer}, password = #{password}, category = #{category}, mtime = #{mtime}
+		WHERE id = #{id};
+	</update>
+	<select id="selectCount" resultType="int">
+		SELECT count(*)
+		FROM posts
+		WHERE isDeleted = 0;
+	</select>
+</mapper>

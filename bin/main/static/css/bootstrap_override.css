@@ -1,0 +1,33 @@
+@charset "EUC-KR";
+
+body {
+	background-color: #eeeeee;
+}
+
+a.nav-link {
+	color: #ffffff;
+}
+
+.nav-pills .nav-link.active, .show>.nav-pills .nav-link {
+	background-color: #868e96;
+}
+
+.jumbotron {
+	background-color: #f0edef;
+}
+
+.page-link {
+	color: #000000;
+}
+
+.hr-gray {
+	border-top: 1px solid #969e96;
+}
+
+.border-gray {
+	border-color: #969e96 !important;
+}
+
+.footer {
+	padding: 15px;
+}

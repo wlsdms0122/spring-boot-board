@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="ko" xmlns="http://www.thymeleaf.org">
+<head>
+<title>Spring-boot Web Community Board</title>
+<!-- meta tags 필요 -->
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
+	integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
+	crossorigin="anonymous">
+<link rel="stylesheet" href="/css/bootstrap_override.css">
+</head>
+<body>
+	<div th:replace="fragments/nav :: nav"></div>
+
+	<div class="jumbotron">
+		<h1 class="display-3 mb-4">안녕하세요!</h1>
+		<p class="lead">Back-end로 Springboot를 사용하며, Front-end로 HTML5와
+			Thymeleaf를 사용하여 웹 커뮤니티 게시판을 만들었습니다.</p>
+		<hr class="my-4">
+		<p>If you want to know more, press the button at the bottom.</p>
+		<p class="lead">
+			<a class="btn btn-primary btn-lg" href="/board/list" role="button">바로가기</a>
+		</p>
+	</div>
+
+	<div class="card-deck mb-5 mr-auto ml-auto">
+		<div class="card">
+			<img class="card-img-top p-3" src="image/spring_boot.png"
+				alt="SrpingBoot">
+			<div class="card-body">
+				<h4 class="card-title">Spring Boot</h4>
+				<p class="card-text">Spring Boot makes it easy to create
+					stand-alone, production-grade Spring based Applications that you
+					can "just run".</p>
+			</div>
+		</div>
+		<div class="card">
+			<img class="card-img-top p-3" src="image/html5.png"
+				alt="Card image cap">
+			<div class="card-body">
+				<h4 class="card-title">HTML 5</h4>
+				<p class="card-text">HTML5 is a markup language used for
+					structuring and presenting content on the World Wide Web. It is the
+					fifth and current major version of the HTML standard.</p>
+			</div>
+		</div>
+		<div class="card">
+			<img class="card-img-top p-4" src="image/thymeleaf.png"
+				alt="Card image cap">
+			<div class="card-body">
+				<h4 class="card-title">Thymeleaf</h4>
+				<p class="card-text">Thymeleaf is a Java XML/XHTML/HTML5
+					template engine that can work both in web (Servlet-based) and
+					non-web environments.</p>
+			</div>
+		</div>
+	</div>
+
+	<div th:replace="fragments/footer :: footer"></div>
+
+	<!-- Optional JavaScript -->
+	<!-- 먼저 jQuery가 오고 그 다음 Popper.js 그 다음 Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+		integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"
+		integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"
+		crossorigin="anonymous"></script>
+</body>
+</html>
