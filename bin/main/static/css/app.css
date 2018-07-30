@@ -1,0 +1,47 @@
+@charset "EUC-KR";
+
+body {
+	background-color: #eeeeee;
+}
+
+a.nav-link {
+	color: #ffffff;
+}
+
+.nav-pills .nav-link.active, .show>.nav-pills .nav-link {
+	background-color: #868e96;
+}
+
+.jumbotron {
+	background-color: #f0edef;
+}
+
+.page-link {
+	color: #000000;
+}
+
+.hr-gray {
+	border-top: 1px solid #969e96;
+}
+
+.border-gray {
+	border-color: #969e96 !important;
+}
+
+.footer {
+	padding: 15px;
+}
+
+.rounded-left {
+	border-top-left-radius: .25rem!important;
+    border-bottom-left-radius: .25rem!important;
+	border-top-right-radius: 0!important;
+    border-bottom-right-radius: 0!important;
+}
+
+.rounded-right {
+	border-top-left-radius: 0!important;
+    border-bottom-left-radius: 0!important;
+	border-top-right-radius: .25rem!important;
+    border-bottom-right-radius: .25rem!important;
+}
