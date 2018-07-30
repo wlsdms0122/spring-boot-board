@@ -29,7 +29,6 @@ public class BoardController {
 	@RequestMapping("/board/list")
 	public String list(ViewParams viewParams, Model model) {
 		model.addAttribute("board", "active");
-		model.addAttribute("chat", "disabled");
 
 		model.addAttribute("posts", postService.getPosts(viewParams));
 		model.addAttribute("pageCount", (int)Math.ceil(postService.getPostCount() / (double)20));
@@ -42,7 +41,6 @@ public class BoardController {
 	@RequestMapping(method = RequestMethod.GET, value = "/board/view")
 	public String view(ViewParams viewParams, @RequestParam int id, Model model) {
 		model.addAttribute("board", "active");
-		model.addAttribute("chat", "disabled");
 		
 		Post post = postService.getPost(id);
 		if (post.getIsDeleted()) {
@@ -60,7 +58,6 @@ public class BoardController {
 	@RequestMapping("/board/write")
 	public String write(Model model) {
 		model.addAttribute("board", "active");
-		model.addAttribute("chat", "disabled");
 
 		return "board/write";
 	}
@@ -69,7 +66,6 @@ public class BoardController {
 	@RequestMapping(method = RequestMethod.POST, value = "/board/modify")
 	public String modify(@RequestParam(required = false) String password, @RequestParam int id, Model model) {
 		model.addAttribute("board", "active");
-		model.addAttribute("chat", "disabled");
 
 		if (password == null) {
 			return "board/validate";
@@ -90,7 +86,6 @@ public class BoardController {
 	@RequestMapping(method = RequestMethod.POST, value = "/board/delete")
 	public String delete(@RequestParam(required = false) String password, @RequestParam int id, Model model) {
 		model.addAttribute("board", "active");
-		model.addAttribute("chat", "disabled");
 		
 		if (password == null) {
 			return "board/validate";

@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ko" xmlns="http://www.thymeleaf.org">
+<head>
+<title>Spring-boot Web Community Board</title>
+<!-- meta tags 필요 -->
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<link rel="stylesheet" href="/webjars/bootstrap/4.1.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/app.css">
+
+<script src="/webjars/jquery/3.3.1/jquery.min.js"></script>
+<script src="/webjars/popper.js/1.14.0/dist/umd/popper.min.js"></script>
+<script src="/webjars/bootstrap/4.1.2/js/bootstrap.min.js"></script>
+<script src="/js/app.js"></script>
+<script src="/js/date.format.js"></script>
+</head>
+<body>
+	<div th:replace="fragments/nav :: nav"></div>
+
+	<div class="container pt-5 pb-5">
+		<form class="w-100" action="room" method="post">
+			<div class="form-row">
+				<div class="col form-group mb-2">
+					<label>닉네임</label> <input name="nickname" type="text" class="form-control">
+				</div>
+			</div>
+			<div class="form-row justify-content-end">
+				<div class="col-auto form-group">
+					<button type=submit class="btn btn-success">참가</button>
+				</div>
+			</div>
+		</form>
+	</div>
+
+	<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="ko" xmlns="http://www.thymeleaf.org">
+<head>
+<title>Spring-boot Web Community Board</title>
+<!-- meta tags 필요 -->
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<link rel="stylesheet" href="/webjars/bootstrap/4.1.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/app.css">
+
+<script src="/webjars/jquery/3.3.1/jquery.min.js"></script>
+<script src="/webjars/popper.js/1.14.0/dist/umd/popper.min.js"></script>
+<script src="/webjars/bootstrap/4.1.2/js/bootstrap.min.js"></script>
+<script src="/webjars/sockjs-client/sockjs.min.js"></script>
+<script src="/webjars/stomp-websocket/stomp.min.js"></script>
+<script src="/js/socket.js"></script>
+<script src="/js/date.format.js"></script>
+
+<script th:inline="javascript">
+	$(document).ready(function() {
+		$("#send").on("click", function(e) {
+			sendMessage();
+		});
+		
+		$("#message").keypress(function(e) {
+			if (e.which == 13)
+			sendMessage();
+		});
+	});
+	
+	function sendMessage() {
+		var nickname = [[${nickname}]];
+		var message = $("#message");
+		sendChat(nickname, message.val());
+		message.val("");
+	}
+	
+	connect([[${nickname}]]);
+</script>
+</head>
+<body>
+	<div th:replace="fragments/nav :: nav"></div>
+
+	<div class="container pt-3 pb-3" style="height: calc(100vh - 178px)">
+		<div class="border border-gray p-3 mb-3" style="height: calc(100% - 38px - 1rem); overflow-y: scroll;">
+			<table id="list" class="table">
+				<!-- chat -->
+			</table>
+		</div>
+		<div class="row">
+			<div class="col pr-0">
+				<input id="message" class="form-control rounded-left"
+					type="text">
+			</div>
+			<div class="col-auto pl-0">
+				<button id="send" class="btn btn-warning rounded-right">전송</button>
+			</div>
+		</div>
+	</div>
+
+	<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>
