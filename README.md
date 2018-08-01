@@ -1,7 +1,7 @@
 ﻿# Welcome to Spring Board
 
 Hi! This is a example made by Spring boot and Thymeleaf template engine.
-It work basic board functions post crud, comment crud (except update).
+It work basic board functions post crud, comment crud (except update) and chat service using websocket.
 
 ## Development environment
 - IDE : STS 3.9.5.RELEASE
