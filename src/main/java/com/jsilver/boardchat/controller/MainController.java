@@ -10,7 +10,6 @@ public class MainController {
 	@RequestMapping("/")
 	public String index(Model model) {
 		model.addAttribute("home", "active");
-		model.addAttribute("chat", "disabled");
 		
 		return "index";
 	}
