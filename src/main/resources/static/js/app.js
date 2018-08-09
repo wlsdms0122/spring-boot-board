@@ -11,3 +11,8 @@ function getURL(target, page, category, option, search) {
 
 	return url;
 }
+
+Date.prototype.parse = function(dateString) {
+    var date = dateString.split(' ');
+    return new Date(date[0] + "T" + date[1]);
+}

@@ -1,10 +1,7 @@
 package com.jsilver.boardchat.service;
 
-import java.sql.SQLException;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,21 +14,25 @@ import com.jsilver.boardchat.mapper.PostMapper;
 public class PostService {
 	@Autowired
 	PostMapper postMapper;
+
+	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	
-	public void create(Post post) throws SQLException {
-		Date now = new Date();
+	public void create(Post post) {
+		Calendar calendar = Calendar.getInstance();
+		String now = format.format(calendar.getTime());
 		post.setCtime(now);
 		post.setMtime(now);
 		
 		postMapper.insert(post);
 	}
 	
-	public void remove(int id) throws SQLException {
+	public void remove(int id) {
 		postMapper.delete(id);
 	}
 	
-	public void modify(Post post) throws SQLException {
-		Date now = new Date();
+	public void modify(Post post) {
+		Calendar calendar = Calendar.getInstance();
+		String now = format.format(calendar.getTime());
 		post.setMtime(now);
 		
 		postMapper.update(post);
@@ -40,24 +41,24 @@ public class PostService {
 	public List<Post> getPosts(ViewParams viewParams) {
 		Map<String, Object> param = new HashMap<>();
 		param.put("start", 20 * (viewParams.getPage() - 1));
-		param.put("category", (viewParams.getCategory() == null || viewParams.getCategory().equals("ÀüÃ¼")) ? null : viewParams.getCategory());
+		param.put("category", (viewParams.getCategory() == null || viewParams.getCategory().equals("ì „ì²´")) ? null : viewParams.getCategory());
 		param.put("option", viewParams.getOption());
 		param.put("search", viewParams.getSearch());
-		
+
 		List<Post> posts = postMapper.select(param);
 		
-		// ÃÖ±Ù Ãß°¡µÈ °Ô½Ã±Û Ç¥½Ã
-		Date now = new Date();
+		// represent recently updated post
+		Calendar calendar = Calendar.getInstance();
 		for(Post post : posts) {
-			long dif = now.getTime() - post.getCtime().getTime();
+			long dif = calendar.getTimeInMillis() - post.getCdate().getTime();
 			long difDays = dif / (24 * 60 * 60 * 1000);
-			
+
 			if (difDays > 0)
 				break;
-			
+
 			post.setNew(true);
 		}
-		
+
 		return posts;
 	}
 	

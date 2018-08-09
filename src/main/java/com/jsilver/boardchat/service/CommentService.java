@@ -1,10 +1,7 @@
 package com.jsilver.boardchat.service;
 
-import java.sql.SQLException;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,20 +13,23 @@ import com.jsilver.boardchat.mapper.CommentMapper;
 public class CommentService {
 	@Autowired
 	CommentMapper commentMapper;
+
+	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	
-	public void create(Comment comment) throws SQLException {
-		Date now = new Date();
+	public void create(Comment comment) {
+		Calendar calendar = Calendar.getInstance();
+		String now = format.format(calendar.getTime());
 		comment.setCtime(now);
 		comment.setMtime(now);
 		
 		commentMapper.insert(comment);
 	}
 	
-	public void remove(int id) throws SQLException {
+	public void remove(int id) {
 		commentMapper.delete(id);
 	}
 	
-	public void modify(Comment comment) throws SQLException {
+	public void modify(Comment comment) {
 		
 	}
 	

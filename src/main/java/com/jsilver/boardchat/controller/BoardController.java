@@ -1,6 +1,5 @@
 package com.jsilver.boardchat.controller;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +24,7 @@ public class BoardController {
 	@Autowired
 	CommentService commentService;
 	
-	// °Ô½Ã±Û ¸ñ·Ï Á¶È¸ ÆäÀÌÁö
+	// ê²Œì‹œê¸€ ëª©ë¡ ì¡°íšŒ í˜ì´ì§€
 	@RequestMapping("/board/list")
 	public String list(ViewParams viewParams, Model model) {
 		model.addAttribute("board", "active");
@@ -37,7 +36,7 @@ public class BoardController {
 		return "board/list";
 	}
 	
-	// °Ô½Ã±Û Á¶È¸ ÆäÀÌÁö
+	// ê²Œì‹œê¸€ ì¡°íšŒ í˜ì´ì§€
 	@RequestMapping(method = RequestMethod.GET, value = "/board/view")
 	public String view(ViewParams viewParams, @RequestParam int id, Model model) {
 		model.addAttribute("board", "active");
@@ -54,7 +53,7 @@ public class BoardController {
 		return "board/view";
 	}
 	
-	// °Ô½Ã±Û ÀÛ¼º ÆäÀÌÁö
+	// ê²Œì‹œê¸€ ì‘ì„± í˜ì´ì§€
 	@RequestMapping("/board/write")
 	public String write(Model model) {
 		model.addAttribute("board", "active");
@@ -62,7 +61,7 @@ public class BoardController {
 		return "board/write";
 	}
 	
-	// °Ô½Ã±Û ¼öÁ¤ ÆäÀÌÁö
+	// ê²Œì‹œê¸€ ìˆ˜ì • í˜ì´ì§€
 	@RequestMapping(method = RequestMethod.POST, value = "/board/modify")
 	public String modify(@RequestParam(required = false) String password, @RequestParam int id, Model model) {
 		model.addAttribute("board", "active");
@@ -82,7 +81,7 @@ public class BoardController {
 		return "board/modify";
 	}
 	
-	// °Ô½Ã±Û »èÁ¦ ÆäÀÌÁö
+	// ê²Œì‹œê¸€ ì‚­ì œ í˜ì´ì§€
 	@RequestMapping(method = RequestMethod.POST, value = "/board/delete")
 	public String delete(@RequestParam(required = false) String password, @RequestParam int id, Model model) {
 		model.addAttribute("board", "active");
@@ -100,68 +99,47 @@ public class BoardController {
 		return "redirect:/board/post/delete.process" + "?id=" + id;
 	}
 	
-	// °Ô½Ã±Û ÀÛ¼º
+	// ê²Œì‹œê¸€ ì‘ì„±
 	@RequestMapping(method = RequestMethod.POST, value = "/board/post/create.process")
 	public String postCreate(Post post) {
-		try {
-			postService.create(post);
-		}
-		catch (SQLException e) {
-			e.printStackTrace();
-		}
+		postService.create(post);
 		
 		return "redirect:/board/list";
 	}
 	
-	// °Ô½Ã±Û »èÁ¦
+	// ê²Œì‹œê¸€ ì‚­ì œ
 	@RequestMapping("/board/post/delete.process")
 	public String postDelete(@RequestParam int id) {
-		try {
-			postService.remove(id);
-		}
-		catch(SQLException e) {
-			e.printStackTrace();
-		}
+		postService.remove(id);
 		
 		return "redirect:/board/list";
 	}
 	
-	// °Ô½Ã±Û ¼öÁ¤
+	// ê²Œì‹œê¸€ ìˆ˜ì •
 	@RequestMapping(method = RequestMethod.POST, value = "/board/post/update.process")
 	public String postUpdate(@RequestParam int id, Post post) {
-		try {
-			postService.modify(post);
-		}
-		catch(SQLException e) {
-			e.printStackTrace();
-		}
-		
+		postService.modify(post);
+
 		return "redirect:/board/view" + "?id=" + post.getId();
 	}
 	
-	// ´ñ±Û Á¶È¸
+	// ëŒ“ê¸€ ì¡°íšŒ
 	@RequestMapping("/board/comment/view.process")
 	@ResponseBody
 	public List<Comment> commentView(@RequestParam int page, @RequestParam int post_id) {
 		return commentService.getComments(page, post_id);
 	}
 	
-	// ´ñ±Û ÀÛ¼º
+	// ëŒ“ê¸€ ì‘ì„±
 	@RequestMapping(method = RequestMethod.POST, value = "/board/comment/create.process")
 	@ResponseBody
 	public int commentCreate(Comment comment) {
-		try {
-			commentService.create(comment);
-		}
-		catch (SQLException e) {
-			e.printStackTrace();
-			return 0;
-		}
+		commentService.create(comment);
 		
 		return 1;
 	}
 	
-	// ´ñ±Û »èÁ¦
+	// ëŒ“ê¸€ ì‚­ì œ
 	@RequestMapping(method = RequestMethod.POST, value = "/board/comment/delete.process")
 	@ResponseBody
 	public int commentDelete(@RequestParam int id, @RequestParam String password) {
@@ -169,14 +147,8 @@ public class BoardController {
 		if (!comment.getPassword().equals(password)) {
 			return 0;
 		}
-		
-		try {
-			commentService.remove(id);
-		}
-		catch (SQLException e) {
-			e.printStackTrace();
-			return 0;
-		}
+
+		commentService.remove(id);
 		
 		return 1;
 	}

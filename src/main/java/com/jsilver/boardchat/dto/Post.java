@@ -1,22 +1,26 @@
 package com.jsilver.boardchat.dto;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Post {
+	// database
 	private int id;
 	private String title;
 	private String content;
 	private String writer;
 	private String password;
 	private String category;
-	private Date ctime;
-	private Date mtime;
-	private int parent;
+	private String ctime;
+	private String mtime;
 	private boolean isDeleted;
-	
+
+	// view
 	private int commentCount;
 	private boolean isNew = false;
 	private String[] contents;
+	private Date cdate;
 	
 	public int getId() {
 		return id;
@@ -67,28 +71,28 @@ public class Post {
 		this.category = category;
 	}
 	
-	public Date getCtime() {
+	public String getCtime() {
 		return ctime;
 	}
 	
-	public void setCtime(Date ctime) {
+	public void setCtime(String ctime) {
 		this.ctime = ctime;
+
+		try {
+			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			this.cdate = format.parse(this.ctime);
+		}
+		catch (ParseException e) {
+			e.printStackTrace();
+		}
 	}
 	
-	public Date getMtime() {
+	public String getMtime() {
 		return mtime;
 	}
 	
-	public void setMtime(Date mtime) {
+	public void setMtime(String mtime) {
 		this.mtime = mtime;
-	}
-	
-	public int getParent() {
-		return parent;
-	}
-	
-	public void setParent(int parent) {
-		this.parent = parent;
 	}
 
 	public boolean getIsDeleted() {
@@ -107,15 +111,19 @@ public class Post {
 		this.commentCount = commentCount;
 	}
 
-	public String[] getContents() {
-		return this.contents;
-	}
-
 	public boolean isNew() {
 		return isNew;
 	}
 
 	public void setNew(boolean isNew) {
 		this.isNew = isNew;
+	}
+
+	public String[] getContents() {
+		return this.contents;
+	}
+
+	public Date getCdate() {
+		return this.cdate;
 	}
 }

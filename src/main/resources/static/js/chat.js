@@ -76,7 +76,7 @@ function showOut(message) {
 function showChat(message) {
 	var join = "<tr>\n";
 	join += "<td class='border-0 p-0'>\n";
-	join += "<small class='text-muted'>" + message.nickname + " - " + new Date(message.time).format("HH : MM") + "</small>\n";
+	join += "<small class='text-muted'>" + message.nickname + " - " + new Date().parse(message.time).format("HH : MM") + "</small>\n";
 	join += "<p class='mb-1'>" + message.content + "</p>\n";
 	join += "</td>"
 	join += "</tr>\n";

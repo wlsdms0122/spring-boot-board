@@ -1,5 +1,7 @@
 package com.jsilver.boardchat.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,13 +24,6 @@ import com.jsilver.boardchat.service.ChatService;
 public class ChatController {
 	@Autowired
 	private ChatService chatService;
-	
-	@RequestMapping("/chat/index")
-	public String index(Model model) {
-		model.addAttribute("chat", "active");
-		
-		return "chat/index";
-	}
 	
 	@RequestMapping("/chat/join")
 	public String join(Model model) {
@@ -54,8 +49,9 @@ public class ChatController {
     		chatService.addUser(sessionId, message.getNickname());
     		break;
     	case CHAT:
-        	Date time = new Date();
-        	message.setTime(time.toGMTString());
+			Calendar calendar = Calendar.getInstance();
+			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        	message.setTime(format.format(calendar.getTime()));
         	message.setType(MessageType.CHAT);
     		break;
     	}
