@@ -36,7 +36,7 @@
 		FROM posts
 		WHERE id = #{id};
 	</select>
-	<insert id="insert" parameterType="Post">
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="Post">
 		INSERT INTO posts(title, content, writer, password, category, ctime, mtime)
 		VALUES (#{title}, #{content}, #{writer}, #{password}, #{category}, #{ctime}, #{mtime});
 	</insert>
